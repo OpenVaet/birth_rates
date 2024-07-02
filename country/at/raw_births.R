@@ -7,6 +7,10 @@ births <- c(79330, 81722, 84381, 87675, 87633, 85535, 84952, 83603, 86078, 82627
 
 data <- data.frame(year = years, births = births)
 
+print(data)
+# Prints the yearly births.
+write.csv(data, 'data/at/births_by_year.csv')
+
 # Fits a linear model to data from 2013 to 2019
 fit <- lm(births ~ year, data = data[data$year <= 2019,])
 
