@@ -5,14 +5,8 @@ library(dplyr)
 library(scales)
 
 # Reads the CSV file
-file_path <- "data/be/women_age_group_2013_2023.csv"
-data <- read_csv(file_path)
-
-# Reshapes the data to long format for plotting
-data_long <- pivot_longer(data, cols = -Age, names_to = "Year", values_to = "Count")
-
-# Converts Year to integer
-data_long$Year <- as.integer(data_long$Year)
+file_path <- "data/bg/women_age_groups_by_year.csv"
+data_long <- read_csv(file_path)
 
 # Summarizes the total number of women for each year
 total_by_year <- data_long %>%
@@ -20,7 +14,7 @@ total_by_year <- data_long %>%
   summarize(Total = sum(Count))
 
 # Prints the total of women in age by year.
-write.csv(total_by_year, 'data/be/women_in_age_by_year.csv')
+write.csv(total_by_year, 'data/bg/women_in_age_by_year.csv')
 print(total_by_year)
 
 # Plots the total number of women for each year
@@ -42,10 +36,6 @@ ggplot(total_by_year, aes(x = Year, y = Total)) +
     legend.text = element_text(size = 18),
     plot.caption = element_text(size = 16)
   )
-
-
-# Prints the total by age groups yearly.
-write.csv(data_long, 'data/be/women_age_groups_by_year.csv')
 
 # Plots the evolution of women by age group
 ggplot(data_long, aes(x = Year, y = Count, color = Age)) +

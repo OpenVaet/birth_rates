@@ -30,7 +30,7 @@ while (<$in_1>) {
 close $in_1;
 
 my $file_2   = '20240703_15_25_women_age_group_2013_2022.csv';
-my $file_out = '20240703_15_25_women_age_group_2013_2023.csv';
+my $file_out = 'women_age_group_2013_2023.csv';
 
 open my $in_2, '<:utf8', $file_2;
 open my $out, '>:utf8', $file_out;
