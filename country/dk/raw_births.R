@@ -9,6 +9,7 @@ data <- data.frame(year = years, births = births)
 data$births <- as.integer(data$births)
 
 print(data)
+
 # Prints the yearly births.
 write.csv(data, 'data/dk/births_by_year.csv')
 

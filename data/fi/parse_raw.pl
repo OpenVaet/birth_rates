@@ -73,3 +73,34 @@ for my $year (sort{$a <=> $b} keys %by_year_age) {
 	}
 }
 close $out_1;
+
+
+
+my $file_2 = '001_11rc_2023_20240704-233842.csv';
+
+# Reads input.
+my %pop = ();
+open my $in_2, '<:utf8', $file_2;
+while (<$in_2>) {
+	chomp $_;
+	$_ =~ s/\"//g;
+	my ($year, @values) = split ',', $_;
+	next unless $year && looks_like_number $year;
+	$year++;
+	my @age_groups = ('15 to 19 years', '20 to 24 years', '25 to 29 years', '30 to 34 years', '35 to 39 years', '40 to 44 years');
+	for my $value (@values) {
+		my $age_group = shift @age_groups;
+		$pop{$year}->{$age_group} = $value;
+	}
+}
+close $in_2;
+
+open my $out_2, '>:utf8', 'women_age_groups_by_year.csv';
+say $out_2 "Age,Year,Count";
+for my $year (sort{$a <=> $b} keys %pop) {
+	for my $age (sort keys %{$pop{$year}}) {
+		my $count = $pop{$year}->{$age} // die;
+		say $out_2 "$age,$year,$count";
+	}
+}
+close $out_2;
