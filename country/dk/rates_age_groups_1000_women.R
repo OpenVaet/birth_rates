@@ -5,8 +5,8 @@ library(tidyr)
 library(scales)
 
 # Reads the CSV files
-women_age_groups <- read_csv('data/be/women_age_groups_by_year.csv')
-births_long <- read_csv('data/be/births_by_mother_age_group_year.csv')
+women_age_groups <- read_csv('data/dk/women_age_groups_by_year.csv')
+births_long <- read_csv('data/dk/births_by_mother_age_group_year.csv')
 
 # Merges the data frames by Age and Year
 data <- women_age_groups %>%
@@ -47,7 +47,7 @@ ggplot(final_data, aes(x = Year, y = birth_rate, color = Age)) +
   geom_line(aes(y = predicted_rate), linetype = "dashed", size = 1.2) +
   geom_text(aes(label = ifelse(Year >= 2020, paste0(round(deviation, 1), "%"), "")),
             vjust = -1, size = 6) +
-  labs(title = "BG - Birth Rates per 1000 Women in Age Group and Deviation from Linear Trend (2013-2019)",
+  labs(title = "DK - Birth Rates per 1000 Women in Age Group and Deviation from Linear Trend (2013-2019)",
        x = "Year",
        y = "Birth Rate per 1000 Women",
        color = "Age Group",

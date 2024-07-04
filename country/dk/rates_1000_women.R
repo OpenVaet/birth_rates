@@ -3,8 +3,8 @@ library(readr)
 library(dplyr)
 
 # Reads the CSV files
-births_data <- read_csv('data/bg/births_by_year.csv')
-women_data <- read_csv('data/bg/women_in_age_by_year.csv')
+births_data <- read_csv('data/dk/births_by_year.csv')
+women_data <- read_csv('data/dk/women_in_age_by_year.csv')
 
 # Calculates the birth rate per 1000 women for each year
 data <- births_data %>%
@@ -27,7 +27,7 @@ ggplot(data, aes(x = year, y = birth_rate)) +
   geom_line(aes(y = predicted_rate), linetype = "dashed", color = "blue", size = 1.2) +
   geom_text(aes(label = ifelse(year >= 2020, paste0(round(deviation, 1), "%"), "")),
             vjust = -1, size = 6) +
-  labs(title = "BG - Birth Rates per 1000 Women in Age and Deviation from Linear Trend (2013-2019)",
+  labs(title = "DK - Birth Rates per 1000 Women in Age and Deviation from Linear Trend (2013-2019)",
        x = "Year",
        y = "Birth Rate per 1000 Women",
        caption = "Dashed line represents the linear trend (2013-2019)") +
